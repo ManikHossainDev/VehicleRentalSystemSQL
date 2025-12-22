@@ -1,7 +1,7 @@
  -- users table create 
 create table
   users (
-    id serial primary key,
+    user_id serial primary key,
     name varchar(100) not null,
     email varchar(100) unique not null,
     password varchar(255) not null,
@@ -34,7 +34,68 @@ values
     '1122334455',
     'Customer'
   );
+
 -- select users table data 
-select * from users   
+select * from users;
 
+-- create vehicles table 
+create table
+  vehicles (
+    vehicle_id serial primary key,
+    name varchar(100) not null,
+    type
+      varchar(20) not null check (
+        type
+          in ('car', 'bike', 'truck')
+      ),
+      model varchar(50) not null,
+      registration_number varchar(50) unique not null,
+      rental_price decimal(10, 2) not null,
+      status varchar(20) not null check (status in ('available', 'rented', 'maintenance'))
+  );
+-- insert table data  
+insert into vehicles (
+  name,
+  type
+,
+    model,
+    registration_number,
+    rental_price,
+    status
+)
+values
+  (
+    'Toyota Corolla',
+    'car',
+    '2022',
+    'ABC-123',
+    50.00,
+    'available'
+  ),
+  (
+    'Honda Civic',
+    'car',
+    '2021',
+    'DEF-456',
+    60.00,
+    'rented'
+  ),
+  (
+    'Yamaha R15',
+    'bike',
+    '2023',
+    'GHI-789',
+    30.00,
+    'available'
+  ),
+  (
+    'Ford F-150',
+    'truck',
+    '2020',
+    'JKL-012',
+    100.00,
+    'maintenance'
+  );
 
+-- select usinge all vehicles data get 
+select * from vehicles;
