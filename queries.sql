@@ -194,4 +194,22 @@ select
 from bookings b
 inner join users u on b.user_id = u.user_id
 inner join vehicles v on b.vehicle_id = v.vehicle_id;
--- 
+--  
+
+
+-- Query 2: EXISTS
+select 
+  v.vehicle_id as vehicle_id,
+  v.name,
+  v.type,
+  v.model,
+  v.registration_number,
+  v.rental_price as rental_price,
+  v.status as status
+from vehicles as v
+where not exists (
+  select 1
+  from bookings as b
+  where b.vehicle_id = v.vehicle_id
+);  
+
