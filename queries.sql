@@ -213,3 +213,15 @@ where not exists (
   where b.vehicle_id = v.vehicle_id
 );  
 
+-- Query 3: WHERE 
+select
+  vehicle_id as vehicle_id,
+  name,
+  type,
+  model,
+  registration_number,
+  rental_price as rental_price,
+  status as status
+from vehicles
+where status = 'available'
+  and type = 'car'; 
