@@ -45,6 +45,8 @@ from
 
 
 
+
+
 -- create vehicles table 
 create table
   vehicles (
@@ -60,8 +62,6 @@ create table
       rental_price decimal(10, 2) not null,
       status varchar(20) not null check (status in ('available', 'rented', 'maintenance'))
   );
-
-
 
 -- insert table data  
 insert into
@@ -113,6 +113,10 @@ select
   *
 from
   vehicles;
+
+
+
+
 
 
 
@@ -179,10 +183,17 @@ values
 select
   *
 from
-  bookings; 
+  bookings;   
 
 
 
+-- 3 table get users, vehicle, bookings; 
+select * from users;
+select * from vehicles;
+select * from bookings;
+
+
+--Part 2: SQL Queries
 -- Query 1: JOIN
 select 
   b.booking_id as booking_id,
@@ -194,7 +205,7 @@ select
 from bookings b
 inner join users u on b.user_id = u.user_id
 inner join vehicles v on b.vehicle_id = v.vehicle_id;
---  
+
 
 
 -- Query 2: EXISTS
@@ -211,7 +222,9 @@ where not exists (
   select 1
   from bookings as b
   where b.vehicle_id = v.vehicle_id
-);  
+);
+
+
 
 -- Query 3: WHERE 
 select
@@ -225,3 +238,14 @@ select
 from vehicles
 where status = 'available'
   and type = 'car'; 
+
+
+-- Query 4: group by and having 
+select
+  v.name as vehicle_name,
+  count(b.booking_id) as total_bookings
+from vehicles as v
+inner join bookings as b
+  on v.vehicle_id = b.vehicle_id
+group by v.name
+having count(b.booking_id) > 2;
