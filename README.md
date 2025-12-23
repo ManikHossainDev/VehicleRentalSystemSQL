@@ -1,4 +1,3 @@
-# Vehicle Rental System (SQL)
 
 # Vehicle Rental System (SQL)
 
